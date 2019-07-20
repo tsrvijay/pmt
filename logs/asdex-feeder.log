@@ -1,0 +1,10 @@
+18-07-2019 22:52:58.061 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.0.17.Final
+18-07-2019 22:52:58.638 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+18-07-2019 22:52:58.638 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+18-07-2019 22:52:58.646 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 7 ms
+18-07-2019 22:52:58.914 [main] INFO  c.pmt.app.controller.UserController - Calling User service : 
+18-07-2019 22:53:15.446 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.0.17.Final
+18-07-2019 22:53:15.964 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+18-07-2019 22:53:15.964 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+18-07-2019 22:53:15.971 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 7 ms
+18-07-2019 22:53:16.093 [main] INFO  c.pmt.app.controller.UserController - Calling User service : 
