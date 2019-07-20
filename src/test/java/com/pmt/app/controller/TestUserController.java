@@ -1,10 +1,8 @@
 package com.pmt.app.controller;
 
-import static org.junit.Assert.*;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
- 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
