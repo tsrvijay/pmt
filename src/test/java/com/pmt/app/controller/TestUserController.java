@@ -19,12 +19,12 @@ import com.pmt.app.controller.service.UserService;
 public class TestUserController {
 	
 	@Mock
-    private UserService userService;
+    UserService userService; 
 	
 	@InjectMocks 
-    private UserController userController;
+    UserController userController;
  
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
  
     @Before
     public void setup() {
