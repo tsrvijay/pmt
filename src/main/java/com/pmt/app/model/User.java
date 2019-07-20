@@ -10,7 +10,7 @@ public class User {
 	
 
 /**	UserId INT NOT NULL AUTO_INCREMENT,
-	 FirstName VARCHAR(50) NOT NULL,
+	 FirstName VARCHAR(50) NOT NULL, 
 	 LastName VARCHAR(50) NOT NULL,
 	 EmployeeId VARCHAR(20) NOT NULL, **/
 	 
@@ -27,6 +27,9 @@ public class User {
 		this.lastName = lastName;
 		this.employeeId = employeeId;
 	} 
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getUserId() {
 		return userId;
 	}

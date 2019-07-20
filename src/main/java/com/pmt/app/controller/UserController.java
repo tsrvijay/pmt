@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -21,7 +23,7 @@ public class UserController {
 	@Autowired
     private UserService service;
 	
-	@GetMapping("/User/{firstName}")
+	@GetMapping("/User/findByFirstName/{firstName}")
 	public List<User> findByFirstName(@PathVariable String firstName){
 		List<User> list = null;
 		try {
@@ -31,7 +33,39 @@ public class UserController {
 			logger.error("Exception :" ,e);
 		}
 		return list;
+	}
+	@GetMapping("/User/findAll/{sortby}")
+	public List<User> findAll(@PathVariable String sortby){
+		List<User> list = null;
+		try {
+			logger.info("Calling User service : ");
+			list = service.findAll(sortby);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+		return list;
+	}
+	@PostMapping("/User/save")
+	public User save(@RequestBody User user){
 		
+		try {
+			logger.info("Calling User service : ");
+			user = service.save(user);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+		return user;
+	}
+	
+	@PostMapping("/User/delete")
+	public void delete(@RequestBody User user){
+		
+		try {
+			logger.info("Calling User service : ");
+			service.delete(user);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
 	}
 	
 }
