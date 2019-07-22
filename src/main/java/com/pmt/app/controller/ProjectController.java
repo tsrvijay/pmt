@@ -12,32 +12,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pmt.app.controller.service.ProjectService;
+import com.pmt.app.model.Project;
 
-import com.pmt.app.controller.service.UserService;
-import com.pmt.app.model.User;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-public class UserController {
+public class ProjectController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
 	@Autowired
-    private UserService service;
+    private ProjectService service;
 	
-	@GetMapping("/User/findByFirstName/{firstName}")
-	public List<User> findByFirstName(@PathVariable String firstName){
-		List<User> list = null;
-		try {
-			logger.info("Calling User service : ");
-			list = service.findByFirstName(firstName);
-		}catch(Exception e) {
-			logger.error("Exception :" ,e);
-		}
-		return list;
-	}
-	@GetMapping("/User/findAll/{sortby}")
-	public List<User> findAll(@PathVariable String sortby){
-		List<User> list = null;
+	@GetMapping("/Project/findAll/{sortby}")
+	public List<Project> findAll(@PathVariable String sortby){
+		List<Project> list = null;
 		try {
 			logger.info("Calling User service : ");
 			list = service.findAll(sortby);
@@ -46,11 +35,11 @@ public class UserController {
 		}
 		return list;
 	}
-	@PostMapping("/User/save")
-	public User save(@RequestBody User user){
+	@PostMapping("/Project/save")
+	public Project save(@RequestBody Project user){
 		
 		try {
-			logger.info("Calling User service : ");
+			logger.info("Calling Project service : ");
 			user = service.save(user);
 		}catch(Exception e) {
 			logger.error("Exception :" ,e);
@@ -58,11 +47,11 @@ public class UserController {
 		return user;
 	}
 	
-	@PostMapping("/User/delete")
-	public void delete(@RequestBody User user){
+	@PostMapping("/Project/delete")
+	public void delete(@RequestBody Project user){
 		
 		try {
-			logger.info("Calling User service : ");
+			logger.info("Calling Project service : ");
 			service.delete(user);
 		}catch(Exception e) {
 			logger.error("Exception :" ,e);

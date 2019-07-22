@@ -1,5 +1,6 @@
 package com.pmt.app.controller;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,14 +14,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pmt.app.Utils;
 import com.pmt.app.controller.service.UserService;
 import com.pmt.app.model.User;
@@ -54,7 +62,67 @@ public class TestUserController {
 		this.mockMvc.perform(get("/User/findByFirstName/Vijay")).andExpect(status().isOk());
 	}
 	
+	@Test
+	public final void testFindAll() throws Exception {
+		this.mockMvc.perform(get("/User/findAll/firstName")).andExpect(status().isOk());
+	}
 	
+	@Test
+	public final void testSaveSingleEntity() throws Exception {
+		
+		User mockuser = new User("firstName", "Last Name", "emp1");
+
+	    // studentService.addCourse to respond back with mockCourse
+	    Mockito.when(userService.save(Mockito.any(User.class))).thenReturn(mockuser);
+	    
+	    ObjectMapper Obj = new ObjectMapper(); 
+	    String jsonContent = Obj.writeValueAsString(mockuser);
+
+	    // Send course as body to /students/Student1/courses
+	    RequestBuilder requestBuilder = MockMvcRequestBuilders
+	            .post("/User/save")
+	            .accept(MediaType.APPLICATION_JSON)
+	            .content(jsonContent)
+	            .contentType(MediaType.APPLICATION_JSON);
+
+	    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+	    MockHttpServletResponse response = result.getResponse();
+
+	    assertEquals(HttpStatus.OK.value(), response.getStatus());
+		
+		
+	//	this.mockMvc.perform(get("/User/delete/firstName")).andExpect(status().isOk());
+	}
+
+	@Test
+	public final void testDelete() throws Exception {
+		
+		User mockuser = new User("firstName", "Last Name", "emp1");
+
+	    // studentService.addCourse to respond back with mockCourse
+	    Mockito.when(userService.save(Mockito.any(User.class))).thenReturn(mockuser);
+	    
+	    ObjectMapper Obj = new ObjectMapper(); 
+	    String jsonContent = Obj.writeValueAsString(mockuser);
+
+	    // Send course as body to /students/Student1/courses
+	    RequestBuilder requestBuilder = MockMvcRequestBuilders
+	            .post("/User/delete")
+	            .accept(MediaType.APPLICATION_JSON)
+	            .content(jsonContent)
+	            .contentType(MediaType.APPLICATION_JSON);
+
+	    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+	    MockHttpServletResponse response = result.getResponse();
+
+	    assertEquals(HttpStatus.OK.value(), response.getStatus());
+		
+		
+	//	this.mockMvc.perform(get("/User/delete/firstName")).andExpect(status().isOk());
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public final void testSave() throws Exception {

@@ -1,5 +1,7 @@
 package com.pmt.app.service;
 
+import java.util.Date;
+
 import org.json.simple.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,18 +12,21 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.pmt.app.Utils;
+import com.pmt.app.controller.service.ProjectService;
 import com.pmt.app.controller.service.UserService;
+import com.pmt.app.model.Project;
 import com.pmt.app.model.User;
+import com.pmt.app.repository.ProjectRepository;
 import com.pmt.app.repository.UserRepository;
 
-public class TestUserService {
+public class TestProjectService {
 	
 	@InjectMocks
-    UserService userService;
+    ProjectService userService;
 	@Mock
-	UserRepository repository;
+	ProjectRepository repository;
 	
-	JSONArray userList; 
+	
 	MockMvc mockMvc;
 
 	@Before
@@ -29,26 +34,37 @@ public class TestUserService {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(userService).build();
  
-		this.userList = Utils.jsonParsar("src/test/resources/User.json"); 
+		 
 	}
 
 	@Test
 	public final void testSave() {
-		User user = new User("firstName","lastName","emp1");
-		
-		User userOut= userService.save(user);
+		Project project = constructObject();
+		Project userOut= userService.save(project);
 		//assertEquals(user, userOut);
+	}
+
+	private Project constructObject() {
+		Project project = new Project();
+		project.setProjectName("PMT");
+		project.setStartDate(new Date());
+		project.setEndDate(new Date());
+		project.setManager(new User());
+		project.setNoOfTasks(10);
+		project.setCompletedTasks(5);
+		project.setStatus("Completed");
+		return project;
 	}
 	
 	@Test
 	public final void testDelete() {
-		User user = new User("firstName","lastName","emp1");
-		userService.delete(user);
+		Project project = constructObject();
+		userService.delete(project);
 	}
 	
 	@Test
 	public final void testFindAll() {
-		userService.findAll("userId");
+		userService.findAll("projectName");
 	}
 	
 	

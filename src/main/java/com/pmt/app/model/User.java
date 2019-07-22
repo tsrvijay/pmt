@@ -1,9 +1,18 @@
 package com.pmt.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 public class User { 
@@ -16,10 +25,24 @@ public class User {
 	 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	 private int userId;
+	 private long userId;
+	@NotNull
 	 private String firstName;
+	@NotNull
 	 private String lastName;
+	@NotNull
 	 private String employeeId;
+	
+	 @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Task> tasks = new ArrayList<>();
+	 
+	
+	 
+		 
 	 
 	 public User(String firstName, String lastName, String employeeId) {
 		super();
@@ -30,10 +53,10 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getFirstName() {
