@@ -39,26 +39,16 @@ public class TestProjectService {
 
 	@Test
 	public final void testSave() {
-		Project project = constructObject();
+		Project project = Utils.constructProjectObject();
 		Project userOut= userService.save(project);
 		//assertEquals(user, userOut);
 	}
 
-	private Project constructObject() {
-		Project project = new Project();
-		project.setProjectName("PMT");
-		project.setStartDate(new Date());
-		project.setEndDate(new Date());
-		project.setManager(new User());
-		project.setNoOfTasks(10);
-		project.setCompletedTasks(5);
-		project.setStatus("Completed");
-		return project;
-	}
+	
 	
 	@Test
 	public final void testDelete() {
-		Project project = constructObject();
+		Project project = Utils.constructProjectObject();
 		userService.delete(project);
 	}
 	

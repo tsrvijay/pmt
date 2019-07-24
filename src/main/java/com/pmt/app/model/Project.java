@@ -14,9 +14,16 @@ import java.util.Date;
 @Entity
 public class Project {
 	
+	@Override
+	public String toString() {
+		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", priority=" + priority + ", status=" + status + ", noOfTasks=" + noOfTasks
+				+ ", completedTasks=" + completedTasks + ", manager=" + manager + "]";
+	}
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long userId;
+	private long projectId;
 	@NotNull
 	String projectName;
 	
@@ -56,12 +63,14 @@ public class Project {
 	@OneToOne
 	private User manager;
 	
-	public long getUserId() {
-		return userId;
+	
+
+	public long getProjectId() {
+		return projectId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getProjectName() {

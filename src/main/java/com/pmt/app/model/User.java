@@ -18,6 +18,11 @@ import javax.validation.constraints.NotNull;
 public class User { 
 	
 
+@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", employeeId="
+				+ employeeId + ", tasks=" + tasks + "]";
+	}
 /**	UserId INT NOT NULL AUTO_INCREMENT,
 	 FirstName VARCHAR(50) NOT NULL, 
 	 LastName VARCHAR(50) NOT NULL,
