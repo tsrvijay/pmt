@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.pmt.app.controller.UserController;
+import com.pmt.app.model.ParentTask;
 import com.pmt.app.model.Project;
+import com.pmt.app.model.Task;
 import com.pmt.app.model.User;
 
 public class Utils {
@@ -50,5 +52,23 @@ public class Utils {
 		user.setEmployeeId("EmpId001");
 		return user;
 	}
-
+	public static ParentTask constructParentTaskObject() {
+		ParentTask parentTask = new ParentTask();
+		parentTask.setTitle("parent Task");
+		return parentTask;
+	}
+	
+	public static Task constructTaskObject(ParentTask pt,User u, Project p) {
+		Task task = new Task();
+		task.setTask("Task1");
+		task.setParentTask(pt);
+		task.setProject(p);
+		task.setUser(u);
+		task.setStartDate(new Date());
+		task.setEndDate(new Date());
+		task.setPriority(12);
+		task.setStatus("Completed");
+		
+		return task;
+	}
 }

@@ -40,6 +40,7 @@ public class Task {
 	ParentTask parentTask;
 	
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "project_id")
 	Project project;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
