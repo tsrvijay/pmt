@@ -1,5 +1,7 @@
 package com.pmt.app.service;
 
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +39,16 @@ public class TestUserService {
 		User user = new User("firstName","lastName","emp1");
 		
 		User userOut= userService.save(user);
+		//assertEquals(user, userOut);
+	}
+	
+	@Test
+	public final void testSearch() {
+		User user = new User("firstName","lastName","emp1");
+		
+		User userOut= userService.save(user);
+		
+		List<User> list = userService.search("firstName");
 		//assertEquals(user, userOut);
 	}
 	
