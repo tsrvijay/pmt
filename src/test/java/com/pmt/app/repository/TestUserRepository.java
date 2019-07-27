@@ -2,7 +2,9 @@ package com.pmt.app.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -44,6 +46,41 @@ public class TestUserRepository {
 	@Test 
 	public void contextLoads() {
 	}
+	
+	@Test 
+	public void findByFirstNameIsLikeOrLastNameIsLikeOrEmployeeIdIsLike() {
+		User user = new User("Hari","Vijay","001");
+        entityManager.persist(user); 
+        
+		User user1 = new User("Don","Kelly","002");
+        entityManager.persist(user1); 
+		User user2 = new User("Peter","Herry","003");
+        entityManager.persist(user2); 
+        
+
+        List<User> users = repository.findBySearchString("Vij");
+        
+        assertTrue(users.contains(user));
+         
+        
+        System.out.println("User Result : " + users.toString());
+        
+        List<User> users1 = repository.findBySearchString("D");
+        assertTrue(users1.contains(user1));
+
+        List<User> users2 = repository.findBySearchString("H");
+        assertTrue(users2.contains(user));
+        assertTrue(users2.contains(user2));
+        
+        List<User> users3 = repository.findBySearchString("00");
+        assertTrue(users3.contains(user));
+        assertTrue(users3.contains(user1));
+        assertTrue(users3.contains(user2));
+        
+
+        
+	}
+	
 
 	@Test
     public void testFindByName() {

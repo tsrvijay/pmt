@@ -46,6 +46,17 @@ public class UserController {
 		}
 		return list;
 	}
+	@GetMapping("/User/search/{searchString}")
+	public List<User> searchUser(@PathVariable String searchString){
+		List<User> list = null;
+		try {
+			logger.info("Calling User service : ");
+			list = service.search(searchString);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+		return list;
+	}
 	@PostMapping("/User/save")
 	public User save(@RequestBody User user){
 		

@@ -55,6 +55,11 @@ public class TestUserController {
         this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
         this.userList = Utils.jsonParsar("src/test/resources/User.json"); // Loads the test data
     }
+    
+//    @Test 
+//	public final void testSearchUser throws Exception {
+//		this.mockMvc.perform(get("/User/search/Vij")).andExpect(status().isOk());
+//	}
  
 
 	@Test
@@ -66,6 +71,8 @@ public class TestUserController {
 	public final void testFindAll() throws Exception {
 		this.mockMvc.perform(get("/User/findAll/firstName")).andExpect(status().isOk());
 	}
+	
+	
 	
 	@Test
 	public final void testSaveSingleEntity() throws Exception {

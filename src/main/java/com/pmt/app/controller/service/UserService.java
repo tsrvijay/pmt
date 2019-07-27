@@ -27,5 +27,7 @@ public class UserService {
 	public List<User> findAll(String sortby){
 		return repository.findAll(Sort.by(Sort.Direction.ASC, sortby));
 	}
-	
+	public List<User> search(String string){
+		return repository.findBySearchString(string);
+	}
 }
