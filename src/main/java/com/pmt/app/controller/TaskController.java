@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pmt.app.controller.service.TaskService;
+import com.pmt.app.model.ParentTask;
 import com.pmt.app.model.Task;
 
-@CrossOrigin(origins = "http://localhost:4200")
-@RestController
+@CrossOrigin(origins = "*")
+@RestController 
 public class TaskController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
@@ -35,11 +36,34 @@ public class TaskController {
 		}
 		return list;
 	}
+	@GetMapping("/ParentTask/findAll/{projectId}")
+	public List<ParentTask> findParentTask(@PathVariable String projectId){
+		List<ParentTask> list = null;
+		try {
+			logger.info("Calling Task service : ");
+			list = service.findParentTask(projectId);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+		return list;
+	}
 	@PostMapping("/Task/save")
 	public void save(@RequestBody Task task){
 		
 		try {
 			logger.info("Calling Task service : ");
+			service.save(task);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+		
+	}
+	
+	@PostMapping("/ParentTask/save")
+	public void save(@RequestBody ParentTask task){
+		
+		try {
+			logger.info("Calling Parent Task service : ");
 			service.save(task);
 		}catch(Exception e) {
 			logger.error("Exception :" ,e);
