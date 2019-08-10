@@ -71,4 +71,10 @@ public class Utils {
 		
 		return task;
 	}
+	public static Task constructTaskObject() {
+		User u = constructUserObject();
+		ParentTask pt = constructParentTaskObject();
+		Project p = constructProjectObject();
+		return constructTaskObject(pt, u, p);
+	}
 }

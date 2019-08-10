@@ -13,19 +13,25 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.pmt.app.Utils;
 import com.pmt.app.controller.service.ProjectService;
+import com.pmt.app.controller.service.TaskService;
 import com.pmt.app.controller.service.UserService;
+import com.pmt.app.model.ParentTask;
 import com.pmt.app.model.Project;
+import com.pmt.app.model.Task;
 import com.pmt.app.model.User;
+import com.pmt.app.repository.ParentTaskRepository;
 import com.pmt.app.repository.ProjectRepository;
+import com.pmt.app.repository.TaskRepository;
 import com.pmt.app.repository.UserRepository;
 
-public class TestProjectService {
+public class TestTaskService {
 	
 	@InjectMocks
-    ProjectService userService;
+    TaskService userService;
 	@Mock
-	ProjectRepository repository;
-	
+	TaskRepository repository;
+	@Mock
+	ParentTaskRepository parentRepository;
 	
 	MockMvc mockMvc;
 
@@ -39,26 +45,27 @@ public class TestProjectService {
 
 	@Test
 	public final void testSave() {
-		Project project = Utils.constructProjectObject();
-		Project userOut= userService.save(project);
-		userService.updateProjectStatus("completed", new Long(1));
-		//assertEquals(user, userOut);
+		Task project = Utils.constructTaskObject();
+		userService.save(project);
+		userService.delete(project);
+		userService.findAll();
+		userService.findParentTask("1");
+		userService.findTask("1");
+		userService.updateProjectStatus("suspend", new Long(1));
 	}
 
-	
-	
 	@Test
-	public final void testDelete() {
-		Project project = Utils.constructProjectObject();
-		userService.delete(project);
+	public final void testParentSave() {
+		ParentTask project = Utils.constructParentTaskObject();
+		userService.save(project);
+		//assertEquals(user, userOut);
 	}
+	
+	
 	
 	@Test
 	public final void testFindAll() {
-		userService.findAll("projectName");
+		userService.findAll("task");
 	}
 	
-	
-	
-
 }

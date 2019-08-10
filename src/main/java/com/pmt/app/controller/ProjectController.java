@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pmt.app.controller.service.ProjectService;
 import com.pmt.app.model.Project;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins="*",allowedHeaders="*")
 @RestController
 public class ProjectController {
 	
@@ -53,6 +53,17 @@ public class ProjectController {
 		try {
 			logger.info("Calling Project service : ");
 			service.delete(user);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+	}
+	
+	@PostMapping("/Project/updateStatus")
+	public void updateStatus(@RequestBody Project project){
+		
+		try {
+			logger.info("Calling Project service : ");
+			service.updateProjectStatus(project.getStatus(),new Long(project.getProjectId()));
 		}catch(Exception e) {
 			logger.error("Exception :" ,e);
 		}

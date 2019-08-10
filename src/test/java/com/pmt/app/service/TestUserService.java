@@ -39,6 +39,7 @@ public class TestUserService {
 		User user = new User("firstName","lastName","emp1");
 		
 		User userOut= userService.save(user);
+		userService.findByFirstName("firstName");
 		//assertEquals(user, userOut);
 	}
 	

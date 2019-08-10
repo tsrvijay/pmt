@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class ParentTask {
 	@Id
@@ -21,7 +21,6 @@ public class ParentTask {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "project_id")
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	Project project;
 	
 	public long getParentTaskId() {

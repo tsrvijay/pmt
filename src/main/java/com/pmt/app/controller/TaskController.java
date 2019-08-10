@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pmt.app.controller.service.TaskService;
 import com.pmt.app.model.ParentTask;
+import com.pmt.app.model.Project;
 import com.pmt.app.model.Task;
 
 @CrossOrigin(origins = "*")
@@ -42,6 +43,28 @@ public class TaskController {
 		try {
 			logger.info("Calling Task service : ");
 			list = service.findParentTask(projectId);
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+		return list;
+	}
+	
+	@PostMapping("/Task/updateStatus")
+	public void updateStatus(@RequestBody Task task){
+		
+		try {
+			logger.info("Calling Task service : ");
+			service.updateProjectStatus(task.getStatus(),new Long(task.getProject().getProjectId()));
+		}catch(Exception e) {
+			logger.error("Exception :" ,e);
+		}
+	}
+	@GetMapping("/Task/findByProjectId/{projectId}")
+	public List<Task> findTask(@PathVariable String projectId){
+		List<Task> list = null;
+		try {
+			logger.info("Calling Task service : ");
+			list = service.findTask(projectId);
 		}catch(Exception e) {
 			logger.error("Exception :" ,e);
 		}

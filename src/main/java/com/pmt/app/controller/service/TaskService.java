@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.pmt.app.model.ParentTask;
+import com.pmt.app.model.Project;
 import com.pmt.app.model.Task;
 import com.pmt.app.repository.ParentTaskRepository;
 import com.pmt.app.repository.TaskRepository;
@@ -39,8 +40,16 @@ public class TaskService {
 	public List<ParentTask> findParentTask(String projectId){
 		return parentRepository.findByProjectId(projectId);
 	}
+	
+	public List<Task> findTask(String projectId){
+		Project p = new Project();
+		p.setProjectId(Long.parseLong(projectId));
+		return repository.findByProjectId(Long.parseLong(projectId));
+	}
 	public List<ParentTask> findAll(){
 		return parentRepository.findAll();
 	}
-	
+	public void updateProjectStatus(String status, Long projectId) {
+		repository.updateProjectStatus(status,projectId);
+	}
 }
