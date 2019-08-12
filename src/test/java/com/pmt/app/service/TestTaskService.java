@@ -51,7 +51,7 @@ public class TestTaskService {
 		userService.findAll();
 		userService.findParentTask("1");
 		userService.findTask("1");
-		userService.updateProjectStatus("suspend", new Long(1));
+		userService.updateProjectStatus(project);
 	}
 
 	@Test

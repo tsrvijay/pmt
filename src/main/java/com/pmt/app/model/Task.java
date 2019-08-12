@@ -24,7 +24,7 @@ public class Task {
 
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long taskId;
 	@NotNull
 	String task;

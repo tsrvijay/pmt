@@ -31,7 +31,7 @@ public class User {
 	 EmployeeId VARCHAR(20) NOT NULL, **/
 	 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private long userId;
 	@NotNull
 	 private String firstName;

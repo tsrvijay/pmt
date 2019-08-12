@@ -54,7 +54,7 @@ public class TaskController {
 		
 		try {
 			logger.info("Calling Task service : ");
-			service.updateProjectStatus(task.getStatus(),new Long(task.getProject().getProjectId()));
+			service.updateProjectStatus(task); 
 		}catch(Exception e) {
 			logger.error("Exception :" ,e);
 		}

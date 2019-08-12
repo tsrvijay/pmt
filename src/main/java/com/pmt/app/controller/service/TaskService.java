@@ -10,12 +10,16 @@ import com.pmt.app.model.ParentTask;
 import com.pmt.app.model.Project;
 import com.pmt.app.model.Task;
 import com.pmt.app.repository.ParentTaskRepository;
+import com.pmt.app.repository.ProjectRepository;
 import com.pmt.app.repository.TaskRepository;
  @Service
 public class TaskService {
 	
 	@Autowired
     private TaskRepository repository;
+	
+	@Autowired
+    private ProjectRepository projectRepository;
 	
 	@Autowired
     private ParentTaskRepository parentRepository;
@@ -25,7 +29,11 @@ public class TaskService {
 			parentRepository.save(task.getParentTask());
 		}else {
 			repository.save(task);
+			
 		}
+		System.out.println("Task :" + task.toString());
+		
+		projectRepository.updateProjectTaskCount(task.getProject().getProjectId());
 	}
 	
 	public void save(ParentTask task){
@@ -49,7 +57,8 @@ public class TaskService {
 	public List<ParentTask> findAll(){
 		return parentRepository.findAll();
 	}
-	public void updateProjectStatus(String status, Long projectId) {
-		repository.updateProjectStatus(status,projectId);
+	public void updateProjectStatus(Task task) {
+		repository.updateProjectStatus(task.getStatus(),task.getTaskId());
+		projectRepository.updateProjectCompletedTaskCount(task.getProject().getProjectId());
 	}
 }
