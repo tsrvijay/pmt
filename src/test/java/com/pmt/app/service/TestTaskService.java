@@ -33,6 +33,9 @@ public class TestTaskService {
 	@Mock
 	ParentTaskRepository parentRepository;
 	
+	@Mock
+	ProjectRepository projectRepository;
+	
 	MockMvc mockMvc;
 
 	@Before
